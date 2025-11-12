@@ -9,7 +9,19 @@ Resolving the discrepancies between [MDAnalysis](https://docs.mdanalysis.org/2.1
 ```python
 hb = GMXHBonds("wat/1EBZ.tpr", "wat/1EBZ.xtc", "protein", "resname BEC")
 hb.run()
+
+# get times and hb numbers 
 print(hb.counts)
+
+# get hbonds details for frame = 5
+frdata = hb.details(5)
+for detail in frdata:
+    # each hbond detail
+    print(detail['donor'])
+    print(detail['acceptor'])
+    print(detail['hydrogen'])
+    print(detail['distance'])
+    print(detail['angle'])
 ```
 
 
