@@ -1,6 +1,5 @@
 # MANIFEST.in
 include README.md
-include LICENSE
 include test/*.py
 include test/*.tpr
 include test/*.xtc
