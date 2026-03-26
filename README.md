@@ -36,10 +36,12 @@ plt.show()
 # get hbonds details for frame = 5
 frdata = hb.details(5)
 for detail in frdata:
-    # each hbond detail
+    # each hbond detail (residue id + residue name + atom name)
     print(detail['donor'])
     print(detail['acceptor'])
     print(detail['hydrogen'])
+    # donor-acceptor distance, unit is Angstrom
     print(detail['distance'])
+    # hydrogen-donor-acceptor angle, unit is degree
     print(detail['angle'])
 ```

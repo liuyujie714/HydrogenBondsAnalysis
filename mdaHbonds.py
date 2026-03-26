@@ -225,7 +225,7 @@ class GMXHBonds:
         print(hb.count_by_time())
 
 if __name__ == '__main__':
-    hb = GMXHBonds("test/big/new.tpr", "test/big/new.xtc", 
+    hb = GMXHBonds("test/big/md.tpr", "test/big/md.xtc", 
                 "protein", "resname *0")
     hb.run()
 
@@ -237,9 +237,11 @@ if __name__ == '__main__':
 
     frdata = hb.details(5)
     for detail in frdata:
-        # each hbond detail
+        # each hbond detail (residue id + residue name + atom name)
         print(detail['donor'])
         print(detail['acceptor'])
         print(detail['hydrogen'])
+        # donor-acceptor distance, unit is Angstrom
         print(detail['distance'])
+        # hydrogen-donor-acceptor angle, unit is degree
         print(detail['angle']) 
