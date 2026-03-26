@@ -172,9 +172,10 @@ class GMXHBonds:
     def run(self, nproc = None):
         # all frame analysis
         frames = [x for x in range(self.u.trajectory.n_frames)]
-        with Pool(processes=cpu_count() if nproc is None else nproc) as work:
+        processes = cpu_count() if nproc is None else nproc
+        with Pool(processes=processes) as work:
             # show progress
-            self.results = list(tqdm(work.imap(self._single_frame_run, frames), total=len(frames)))
+            self.results = list(tqdm(work.imap(self._single_frame_run, frames, len(frames)//processes), total=len(frames)))
 
     @property
     def counts(self):
@@ -224,12 +225,13 @@ class GMXHBonds:
         print(hb.count_by_time())
 
 if __name__ == '__main__':
-    hb = GMXHBonds("test/1EBZ.tpr", "test/1EBZ.xtc", 
-                "protein", "resname BEC")
+    hb = GMXHBonds("test/big/new.tpr", "test/big/new.xtc", 
+                "protein", "resname *0")
     hb.run()
 
     import matplotlib.pyplot as plt
     plt.plot(hb.counts['times'], hb.counts['numbers'])
+    plt.show()
     print(hb.counts['times'])
     print(hb.counts['numbers'])
 
